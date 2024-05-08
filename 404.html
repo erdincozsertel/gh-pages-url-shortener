@@ -21,6 +21,9 @@
           url
         );
       }
+      function isUser(username){
+        return username === "erdincozsertel";
+      }
 
       function redirect() {
         var location = window.location;
@@ -42,6 +45,7 @@
             var payload = JSON.parse(xhr.response);
             var message = payload.message;
             var title = payload.title;
+            var issueUser = payload.user.login;
 
             // Workaround IE 11 lack of support for new URL()
             var url = document.createElement("a");
@@ -52,6 +56,7 @@
               message === "Not Found" ||
               !title ||
               !isUrl(title) ||
+              !isUser(issueUser) ||
               url.hostname === location.hostname;
 
             if (isInvalidUrl) {
